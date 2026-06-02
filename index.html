@@ -246,6 +246,7 @@
   @keyframes floatCard { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
   .fc-arch { animation: floatCardCenter 4s 2s ease-in-out infinite; }
   @keyframes floatCardCenter { 0%,100% { transform: translateY(calc(-50% + 0px)); } 50% { transform: translateY(calc(-50% - 8px)); } }
+  .mobile-tech-chips { display: none; }
 
   @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
   .animate-in { animation: fadeUp 0.7s ease both; }
@@ -394,7 +395,7 @@
   .exp-points li { font-size: 0.875rem; color: var(--text-muted); padding: 4px 0; display: flex; align-items: start; gap: 8px; }
   .exp-points li::before { content: '▸'; color: var(--accent); margin-top: 2px; flex-shrink: 0; }
 
-  /* ===== GITHUB ===== */
+  /* ===== GITHUB =====
   #github { background: var(--bg2); }
   .github-inner { text-align: center; }
   .github-stats { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin: 48px 0; }
@@ -437,7 +438,7 @@
     display: flex; align-items: center; gap: 8px;
     background: var(--glow);
   }
-  .lang-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .lang-dot { width: 10px; height: 10px; border-radius: 50%; } */
 
   /* ===== CONTACT ===== */
   .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 48px; }
@@ -502,14 +503,75 @@
     .fc-arch { display: none; }
   }
   @media (max-width: 600px) {
-    .section-pad { padding: 70px 0; }
-    .float-card { font-size: 0.7rem; padding: 8px 12px; }
-    .fc-flutter { left: -30px; top: 10px; }
-    .fc-firebase { left: -30px; bottom: 40px; }
-    .fc-bloc { right: -30px; top: 10px; }
-    .fc-rn { right: -30px; bottom: 30px; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .contact-grid { grid-template-columns: 1fr 1fr; }
+    /* Root fix: no horizontal overflow */
+    html, body { overflow-x: hidden; width: 100%; }
+    .container { padding: 0 16px; width: 100%; }
+    .section-pad { padding: 60px 0; }
+
+    /* Hero — centered, no overflow */
+    #hero { padding: 100px 0 60px; }
+    .hero-grid { gap: 20px; }
+    .hero-title { font-size: 2.2rem; }
+    .hero-sub { font-size: 0.95rem; }
+    .hero-badge { font-size: 0.72rem; }
+    .hero-btns { flex-direction: column; align-items: center; gap: 10px; }
+    .btn-primary, .btn-secondary { width: 100%; max-width: 280px; justify-content: center; }
+
+    /* Hero visual — hide floating cards, show just the avatar centered */
+    .hero-visual { width: 100%; overflow: hidden; }
+    .dev-avatar { width: 220px; height: 220px; margin: 0 auto; }
+    .float-card { display: none; }
+
+    /* Show tech as inline chips below avatar instead */
+    .mobile-tech-chips {
+      display: flex !important; flex-wrap: wrap; justify-content: center;
+      gap: 8px; margin-top: 16px;
+    }
+
+    /* Section titles */
+    .section-title { font-size: 1.8rem; }
+    .section-desc { font-size: 0.9rem; }
+
+    /* About */
+    .about-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .stat-card { padding: 14px; }
+    .stat-number { font-size: 1.6rem; }
+    .about-card-main { padding: 20px; }
+    .about-text { text-align: center; }
+    .about-tags { justify-content: center; }
+    .section-label { display: flex; }
+
+    /* Skills */
+    .skills-grid { grid-template-columns: 1fr; gap: 14px; }
+    .skill-group { padding: 20px; }
+
+    /* Projects */
+    .projects-grid { grid-template-columns: 1fr; gap: 20px; }
+    .project-filters { gap: 8px; }
+    .filter-btn { font-size: 0.75rem; padding: 6px 14px; }
+
+    /* Experience */
+    .exp-card { grid-template-columns: 1fr; gap: 12px; padding: 20px; }
+    .exp-card:hover { transform: none; }
+
+    /* GitHub
+    .github-stats { gap: 12px; }
+    .gh-stat { padding: 18px 20px; min-width: 130px; }
+    .gh-stat-num { font-size: 1.7rem; }
+    .github-graph { padding: 20px 16px; }
+    .gh-contrib-grid { gap: 2px; } */
+
+    /* Contact — single column on very small screens */
+    .contact-grid { grid-template-columns: 1fr; gap: 14px; }
+    .contact-card { padding: 22px 20px; }
+
+    /* Nav */
+    .nav-inner { padding: 0 16px; }
+    .btn-ghost { padding: 7px 12px; font-size: 0.75rem; }
+
+    /* Footer */
+    footer { padding: 36px 16px; }
+    .footer-tagline { font-size: 0.875rem; }
   }
 </style>
 </head>
@@ -532,13 +594,16 @@
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#experience">Experience</a></li>
-      <!-- <li><a href="#github">GitHub</a></li> -->
+      <li><a href="#github">GitHub</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-actions">
-      <a href="https://drive.google.com/uc?export=download&id=YOUR_CV_FILE_ID" class="btn-ghost" download>
-        ↓ Resume
-      </a>
+      <a
+  href="https://drive.google.com/uc?export=download&id=10X08P8hZGx_QA_ezXTb0HAv92-up2C5f"
+  class="btn-ghost"
+>
+  ↓ Resume
+</a>
       <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle theme">☀️</button>
       <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -571,7 +636,12 @@
         <p class="hero-sub">Building scalable mobile applications with Flutter, Firebase, Clean Architecture, and modern software engineering practices.</p>
         <div class="hero-btns">
           <a href="#projects" class="btn-primary">View Projects →</a>
-          <a href="#" class="btn-secondary" onclick="downloadCV()">↓ Download Resume</a>
+          <a
+  href="https://drive.google.com/uc?export=download&id=10X08P8hZGx_QA_ezXTb0HAv92-up2C5f"
+  class="btn-ghost"
+>
+  ↓ Download Resume
+</a>
         </div>
       </div>
       <div class="hero-visual">
@@ -615,6 +685,14 @@
         <div class="float-card fc-arch">
           <div class="float-card-icon" style="background:rgba(125,211,255,0.15);">🏛️</div>
           <span>Clean Arch</span>
+        </div>
+        <!-- Shown only on mobile instead of floating cards -->
+        <div class="mobile-tech-chips">
+          <span class="chip">🔷 Flutter</span>
+          <span class="chip">🔥 Firebase</span>
+          <span class="chip">⚡ BLoC</span>
+          <span class="chip">⚛️ React Native</span>
+          <span class="chip">🏛️ Clean Arch</span>
         </div>
       </div>
     </div>
@@ -783,7 +861,7 @@
       <div class="skill-group glass-bright reveal reveal-delay-2" style="display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;min-height:180px;">
         <div style="font-size:2.5rem;margin-bottom:12px;">🚀</div>
         <div style="font-family:var(--font-display);font-weight:700;font-size:1rem;margin-bottom:8px;">Open to opportunities</div>
-        <div style="font-size:0.8rem;color:var(--text-muted)">Flutter · React Native · Frontend</div>
+        <div style="font-size:0.8rem;color:var(--text-muted)">Flutter · React Native · Frontend Web Developer</div>
       </div>
     </div>
   </div>
@@ -868,9 +946,8 @@
             <div class="project-links">
               <a href="https://github.com/JosephMarzouk/E-commerce" target="_blank" class="project-link" title="GitHub">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                
               </a>
-            </div>
-            <div class="project-links">
               <a href="https://github.com/JosephMarzouk/admin_dashboard_e__commerce" target="_blank" class="project-link" title="GitHub">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
               </a>
@@ -1177,9 +1254,13 @@ function buildContribGrid() {
 }
 buildContribGrid();
 
-// CV download placeholder
 function downloadCV() {
-  alert('Please update the CV download link in the nav bar with your Google Drive / Dropbox direct download URL.');
+   window.open(
+    'https://drive.google.com/file/d/10X08P8hZGx_QA_ezXTb0HAv92-up2C5f/view',
+    '_blank',
+    'noopener,noreferrer'
+  );
+
 }
 
 // Smooth nav active state
